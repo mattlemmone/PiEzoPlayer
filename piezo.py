@@ -3,22 +3,23 @@ import collections, time
 
 class Song:
    'Store tempo, notes'
-   melody = []
-   timing = []
+   melody, timing = [], []
 
    def __init__(self, title):
       self.title = title
     
 def playSong(Song):
-    GPIO.cleanup()
+    GPIO.cleanup() #Can never be too safe!
+
     print "Now Playing: " + Song.title
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(15, GPIO.OUT) 
-    p = GPIO.PWM(15, 100)
-    GPIO.output(15, True)  
-    time.sleep(1)
-    p.start(100)
-    p.ChangeDutyCycle(90)
+
+    #GPIO prep
+    GPIO.setmode(GPIO.BOARD) #Because nobody likes .BCM
+    GPIO.setup(15, GPIO.OUT) #PWM pin = 15
+    p = GPIO.PWM(15, 90) #Set up pin
+    GPIO.output(15, True) #Start producing sound
+    p.start(90) #duty cycle @ 90%
+
     for i in range(len(Song.melody)):  
         note = noteFrequency[Song.melody[i]]
         p.ChangeFrequency(note) 
@@ -31,8 +32,7 @@ def playSong(Song):
 #Global vars (calm down, its just a script)
 noteFrequency = collections.OrderedDict() #note frequencies
 notesNotRoot = ["C", "C#","D","D#","E","F","F#","G", "G#", "A","A#","B"]
-octaveRange = 4
-baseOctave = 2
+baseOctave, octaveRange = 2, 4
 loopSize = octaveRange + baseOctave + 1
 
 noteFrequency.update({"C2": 65.41}) #Lowest Note
