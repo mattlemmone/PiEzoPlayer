@@ -81,8 +81,8 @@ noteFrequency = collections.OrderedDict() #note frequencies
 noteBank = ["C", "C#","D","D#","E","F","F#","G", "G#", "A","A#","B"]
 baseOctave, octaveRange = 2, 5
 loopSize = octaveRange + baseOctave + 1
-
-noteFrequency.update({"C2": 65.41}) #Lowest Note
+fMult =  1.059463
+noteFrequency.update({"C2": 65.41}) #Lowest Note Supported
 
 #Instantiate dictionary of frequencies starting with C(baseOctave) -> C(loopSize)
 #Ex: baseOctave = 2, octaveRange = 4 -> C(2) -> C(6)
@@ -96,7 +96,7 @@ for j in range(baseOctave, loopSize):
         
         lastNote = noteBank[i-1] + str(curOctave)
         thisNote = noteBank[i] + str(j)
-        thisFreq = noteFrequency[lastNote] * pow(2, 1.0/12.0)
+        thisFreq = noteFrequency[lastNote] * fMult
         
         noteFrequency.update({thisNote: thisFreq}) #update list
     
@@ -175,8 +175,9 @@ zot.timing = [
     .33,
     .25, .23, .14, .14, .14, .14, .4, .14, .3
 ]
+
 zot.play()
 #bubBob.transpose(5).tempoMult(1.3).play()
 #rimShot.play()
 #ff7.transpose(3).play()
-#ff7.transpose(-1).tempoMult(1.6).play()
+#ff7.transpose(5).tempoMult(1.6).play()
