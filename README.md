@@ -2,16 +2,18 @@
 Using a Raspberry Pi, create songs in a tedious format that reflect pre-polyphonic ringtones and 8-bit bliss.
 
 Frequency calculations are approximated. 
+
 Formula as provided by my EEL4523 Audio Engineering class, and can be found on the web.
 ![](http://puu.sh/hZf6a/0f1ff08f3a.png)
 
 ### Circuit
-The circuit is simply using BOARD pin 15 (not BCM) as a square wave generator through pulse width modulation (PWM). The wave varies between HIGH and LOW, 3.3V & 0V.
+![](http://puu.sh/i6lOj/cfded08350.png)
 
-Connect pin 15 to one leg of the piezo, and ground to the other. Orientation doesn't matter. If your sound seems reversed, reverse the connections.
+The circuit is simply using BOARD pin 15 (not BCM) as a square wave generator through pulse width modulation (PWM). The wave varies between HIGH and LOW, 3.3V & 0V.
 
 ### Example
 A good example of usage is included. The 'zot' song object.
+
 Keep melodies and timings with spacings that are easy to follow along with to facilitate song creation.
 
 ```
